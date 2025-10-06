@@ -1,0 +1,31 @@
+
+name: Nginx Docker CI
+ 
+on:
+  push:
+    branches:
+      - main  # Run on commits to main branch
+ 
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+ 
+      - name: Create custom HTML
+        run: |
+          mkdir html
+          echo "<h1>Hello World from GitHub Actions!</h1>" > html/index.html
+          echo "<h2>Welcome to my webpage</h2>" >> html/index.html
+ 
+      - name: Build Docker image
+        run: |
+          docker build -t my-nginx:latest .
+ 
+      - name: Run container and test
+        run: |
+          docker run -d -p 8080:80 my-nginx:latest
+          sleep 5
+          curl http://localhost:8080

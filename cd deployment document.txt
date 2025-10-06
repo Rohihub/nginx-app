@@ -1,0 +1,15 @@
+🔹 Steps to Continuous Deployment
+1. Prerequisites in AWS
+Amazon ECR Repository (e.g. nginx-app)
+ECS Cluster + Service (Fargate) with a task definition that pulls your image from ECR
+IAM user/role with permissions:
+AmazonEC2ContainerRegistryFullAccess
+AmazonECSFullAccess
+2. Store GitHub Secrets
+In your GitHub repo → Settings > Secrets and variables > Actions → add:
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_REGION (e.g. ap-south-1)
+ECR_REGISTRY (e.g. 123456789012.dkr.ecr.ap-south-1.amazonaws.com)
+ECR_REPOSITORY (e.g. nginx-app)
+ 
